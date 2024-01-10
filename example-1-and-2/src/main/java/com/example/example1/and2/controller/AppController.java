@@ -25,7 +25,7 @@ public class AppController {
 
     }
     //version con pathvariable
-    @GetMapping("/plato/{num_plato}")
+    @GetMapping("/plato/{idPlato}")
     public Plato traerPlatos(@PathVariable int idPlato){
         idPlato--;
         List<Plato> listaPlatos = new ArrayList<Plato>();
