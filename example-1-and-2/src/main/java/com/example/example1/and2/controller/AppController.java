@@ -73,7 +73,7 @@ public class AppController {
             Period periodo = Period.between(cli.getFechaNacimiento(),hoy);
             int diferencia = periodo.getYears();
 
-            if ( diferencia >= 18){
+            if ( diferencia < 18){
                 listaMenores.add(cli);
             }
 
