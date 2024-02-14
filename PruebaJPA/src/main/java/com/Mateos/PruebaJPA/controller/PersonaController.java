@@ -47,5 +47,11 @@ public class PersonaController {
         return perso;
     }
 
+    @PutMapping("/personas/editar") //otra manera de editar con el objeto entero, el ID ES INTOCABLE!
+    public Persona editPersona(@RequestBody Persona perso){ // aca lo hacemos con requestbody, no por URL como los demas
+        persoServ.editPersona(perso);
+        return persoServ.findPersona(perso.getId());
+    }
+
 
 }
