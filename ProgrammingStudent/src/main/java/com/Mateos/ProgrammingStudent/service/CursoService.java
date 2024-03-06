@@ -58,6 +58,8 @@ public class CursoService implements ICursoService{
             boolean contieneJava = textoComparar.contains(palabra);
             if (contieneJava) listaCursosJava.add(cur);
         }
+        
+
         return listaCursosJava;
     }
 }
