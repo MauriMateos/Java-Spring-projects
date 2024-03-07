@@ -47,7 +47,7 @@ public class OwnerController {
     }
 
     @GetMapping("/owner/dto/{id}")
-    public PetOwnerDTO ownerDTOById(Long id){
+    public PetOwnerDTO ownerDTOById(@PathVariable Long id){
 
         return ownerServ.getPetOwnerDTO(id);
 
