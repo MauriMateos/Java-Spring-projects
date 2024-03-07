@@ -45,7 +45,6 @@ public class OwnerController {
         ownerServ.deleteOwnerById(id);
         return "Owner deletion success";
     }
-
     @GetMapping("/owner/dto/{id}")
     public PetOwnerDTO ownerDTOById(@PathVariable Long id){
 
