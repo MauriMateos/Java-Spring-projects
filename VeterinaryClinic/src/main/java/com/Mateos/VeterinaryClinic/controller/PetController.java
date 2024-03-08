@@ -15,9 +15,8 @@ public class PetController {
     private IPetService petServ;
 
 
-
     @PostMapping("/pet/create")
-    public String createPet(@RequestBody Pet pet){ //le pasamos el json por el body de la request
+    public String createPet(@RequestBody Pet pet) { //le pasamos el json por el body de la request
 
         petServ.savePet(pet);
         return "Pet creation succesful";
@@ -26,30 +25,30 @@ public class PetController {
 
     //obtain all Pets
     @GetMapping("/pet/get")
-    public List<Pet> getPets(){
+    public List<Pet> getPets() {
         return petServ.getPets();
     }
 
     @GetMapping("/pet/id/{id}") //get Pet by id
-    public Pet getPetById(@PathVariable Long id){ ///testing
+    public Pet getPetById(@PathVariable Long id) { ///testing
         return petServ.findPetById(id);
     }
 
     @PutMapping("/pet/edit") //edit Pet
-    public String editPet(@RequestBody Pet Pet){
+    public String editPet(@RequestBody Pet Pet) {
         petServ.editPet(Pet);
         return "Pet editing success";
     }
 
     @DeleteMapping("/pet/deletebyid/{id}") // delete Pet by id
-    public String deletePetById(@PathVariable Long id){
+    public String deletePetById(@PathVariable Long id) {
         petServ.deletePetById(id);
         return "Pet deletion success";
     }
 
     @GetMapping("/pet/poodle")
-    public List<Pet> poodlePetList(){
+    public List<Pet> poodlePetList() {
         return petServ.getPoodleDogs();
     }
-    
+
 }
