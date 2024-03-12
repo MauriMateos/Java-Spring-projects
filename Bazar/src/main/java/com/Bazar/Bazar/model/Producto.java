@@ -18,9 +18,10 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCliente;
+    private Long codigoProducto;
     private String nombre;
-    private String apellido;
-    private String dni;
+    private String marca;
+    private Double costo;
+    private Double cantidadDisponible;
 
 }

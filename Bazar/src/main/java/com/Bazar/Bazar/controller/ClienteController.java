@@ -2,17 +2,18 @@ package com.Bazar.Bazar.controller;
 
 import com.Bazar.Bazar.model.Cliente;
 import com.Bazar.Bazar.service.ClienteService;
+import com.Bazar.Bazar.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ClienteController {
 
     @Autowired
-    private ClienteService clienteServ;
+    private IClienteService clienteServ;
 
     @PostMapping("/clientes/crear")
     public String createCliente (@RequestBody Cliente cliente){

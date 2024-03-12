@@ -13,8 +13,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 
+@Entity
 public class Venta {
 
     @Id
@@ -22,7 +22,7 @@ public class Venta {
     private Long codigoVenta;
     private LocalDate fechaVenta;
 
-    @OneToMany
+    @ManyToMany
     private List<Producto> listaProductos;
     // La relación entre una venta y sus productos es una relación uno a muchos
     // porque una venta puede tener múltiples productos asociados a ella
@@ -32,5 +32,6 @@ public class Venta {
 
 
     @OneToOne
+    @JoinColumn(name = "id_cliente")
     Cliente unCliente;
 }

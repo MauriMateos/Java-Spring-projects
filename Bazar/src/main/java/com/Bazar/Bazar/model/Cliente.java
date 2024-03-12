@@ -20,10 +20,9 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigoProducto;
+    private Long idCliente;
     private String nombre;
-    private String marca;
-    private Double costo;
-    private Double cantidadDisponible;
+    private String apellido;
+    private String dni;
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ProductoController {
 
     @Autowired
@@ -44,4 +44,6 @@ public class ProductoController {
         productoServ.editProducto(producto);
         return "producto editado correctamente";
     }
+
+    
 }
