@@ -1,16 +1,21 @@
 package com.Bazar.Bazar.controller;
 
+import com.Bazar.Bazar.DTO.ventaClienteProductoDTO;
 import com.Bazar.Bazar.model.Cliente;
+import com.Bazar.Bazar.model.Producto;
 import com.Bazar.Bazar.model.Venta;
 import com.Bazar.Bazar.service.IClienteService;
 import com.Bazar.Bazar.service.IProductoService;
 import com.Bazar.Bazar.service.IVentaService;
 import com.Bazar.Bazar.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 @RestController
 public class VentaController {
@@ -66,6 +71,62 @@ public class VentaController {
     public String deleteVenta(@PathVariable Long id){
         ventaServ.deleteVentaById(id);
         return "venta eliminada correctamente";
+    }
+
+
+            //new code//
+
+    @GetMapping("/ventas/productos/{id}")
+    public List<Producto> listaPorVenta(@PathVariable Long id){
+
+        return this.getVentaById(id).getListaProductos();
+    }
+
+    @GetMapping("/ventas/fecha/{fecha_venta}")
+    public ResponseEntity<Map<String, Object>> fechaVentas(@PathVariable LocalDate fecha_venta){
+        int cantVentas = 0, cantTotal = 0;
+
+
+    for (Venta venta: this.getVentas()){
+        if (venta.getFechaVenta().equals(fecha_venta)){
+
+            cantVentas++;
+            for (Producto producto: venta.getListaProductos()){
+                cantTotal += producto.getCosto();
+            }
+
+
+        }
+    }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cantidadVentas", cantVentas);
+        response.put("valorTotalProductos", cantTotal);
+
+        // Devolver la respuesta en formato JSON
+        return ResponseEntity.ok(response);
+
+
+    }
+
+    @GetMapping("/ventas/mayor-monto")
+    public ResponseEntity<ventaClienteProductoDTO> obtenerVentaMayorMonto() {
+        Venta ventaMayorMonto = ventaServ.obtenerVentaMayorMonto();
+        double cantTotal = 0;
+
+
+        for (Producto producto: ventaMayorMonto.getListaProductos()){
+            cantTotal += producto.getCosto();
+        }
+
+        ventaClienteProductoDTO ventaClienteProductoDTO = new ventaClienteProductoDTO();
+        ventaClienteProductoDTO.setCodigoVenta(ventaMayorMonto.getCodigoVenta());
+        ventaClienteProductoDTO.setTotal(cantTotal);
+        ventaClienteProductoDTO.setCantidadProductos(ventaMayorMonto.getListaProductos().size());
+        ventaClienteProductoDTO.setNombreCliente(ventaMayorMonto.getUnCliente().getNombre());
+        ventaClienteProductoDTO.setApellidoCliente(ventaMayorMonto.getUnCliente().getApellido());
+
+        return ResponseEntity.ok(ventaClienteProductoDTO);
     }
 
 }

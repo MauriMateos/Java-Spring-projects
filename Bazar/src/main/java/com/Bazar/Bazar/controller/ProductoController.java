@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,6 +45,20 @@ public class ProductoController {
         productoServ.editProducto(producto);
         return "producto editado correctamente";
     }
+            // new code//
 
-    
+    @GetMapping("/productos/falta_stock")
+    public List<Producto> faltaStock(){
+        ArrayList<Producto> productosBajos = new ArrayList<>();
+
+        for (Producto prod : this.getProductos()){
+            if (prod.getCantidadDisponible() < 5 ){
+            productosBajos.add(prod);
+            }
+        }
+
+        return productosBajos;
+    }
+
+
 }

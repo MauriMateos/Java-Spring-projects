@@ -18,4 +18,7 @@ public interface IVentaService {
 
     void editVenta(Venta Venta);
 
+    Venta obtenerVentaMayorMonto();
+    double calcularTotal(Venta venta);
+
 }
